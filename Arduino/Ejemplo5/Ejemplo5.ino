@@ -42,9 +42,6 @@ void loop() {
   
   // Leemos del puerto serie hasta que se llene el buffer o haya un salto de linea
 
-  // Seteamos la bandera a false
-  stringComplete = false;
-
   // Mientras haya datos disponibles leemos caracter a caracter del puerto serie
   // Hemos sustituido el objeto Serial por el creado con anterioridad bluetooth
   while (bluetooth.available() && !stringComplete) {
@@ -56,6 +53,7 @@ void loop() {
     if (inChar == '\n' || inputString.length() == SIZE_BUFFER) {
       stringComplete = true;
     }
+    Serial.print(inChar);
   }
 
   /*
@@ -78,6 +76,8 @@ void loop() {
 
     // Limpiamos el buffer
     inputString = "";
+    // Seteamos la bandera a false
+    stringComplete = false;
   }
 
   delay(500);
